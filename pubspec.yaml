@@ -8,6 +8,7 @@ environment:
 
 # Add regular dependencies here.
 dependencies:
+  html: ^0.15.4
   http: ^0.13.6
   serious_python: ^0.4.1
   # path: ^1.8.0
