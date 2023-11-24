@@ -8,6 +8,7 @@ environment:
 
 # Add regular dependencies here.
 dependencies:
+  gsheets: ^0.4.2
   html: ^0.15.4
   http: ^0.13.6
   serious_python: ^0.4.1
