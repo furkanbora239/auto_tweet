@@ -76,4 +76,9 @@ class GSheetsApi {
     }
     return lestTenList;
   }
+
+  Future<bool> write(
+      {required Worksheet worksheet, required List<List<dynamic>> data}) async {
+    return await worksheet.values.appendRows(data);
+  }
 }
