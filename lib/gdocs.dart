@@ -32,7 +32,7 @@ class GSheetsApi {
   Future<Worksheet> getT24SonDakikaWorkSheet() async {
     final Worksheet worksheet =
         await GSheetsApi().getWorkSheet(workSheetName: 'T24 Son Dakika');
-    worksheet.values.insertRow(1, ['date', 'time', 'title']);
+    worksheet.values.insertRow(1, ['date', 'time', 'title', 'link']);
     return worksheet;
   }
 
