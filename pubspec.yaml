@@ -11,7 +11,6 @@ dependencies:
   gsheets: ^0.4.2
   html: ^0.15.4
   http: ^0.13.6
-  twitter_api_v2: ^4.9.4
   # path: ^1.8.0
 
 dev_dependencies:
