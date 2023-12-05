@@ -10,7 +10,7 @@ class GSheetsApi {
 
   Future<String> init() async {
     try {
-      tweetedWorkSheet = await getTweeredWorkSheet();
+      tweetedWorkSheet = await getTweetedWorkSheet();
       t24NewsDetailWorkSheet = await getT24NewsDetailWorkSheet();
       t24SonDakikaWorkSheet = await getT24SonDakikaWorkSheet();
 
@@ -20,7 +20,7 @@ class GSheetsApi {
     }
   }
 
-  Future<Worksheet> getTweeredWorkSheet() async {
+  Future<Worksheet> getTweetedWorkSheet() async {
     final Worksheet worksheet =
         await GSheetsApi().getWorkSheet(workSheetName: 'tweeted');
     worksheet.values.insertRow(1, [
@@ -32,7 +32,7 @@ class GSheetsApi {
   Future<Worksheet> getT24SonDakikaWorkSheet() async {
     final Worksheet worksheet =
         await GSheetsApi().getWorkSheet(workSheetName: 'T24 Son Dakika');
-    worksheet.values.insertRow(1, ['date', 'time', 'title', 'link']);
+    worksheet.values.insertRow(1, ['date', 'time', 'title']);
     return worksheet;
   }
 

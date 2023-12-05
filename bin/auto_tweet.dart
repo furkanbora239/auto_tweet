@@ -1,42 +1,16 @@
+import 'package:auto_tweet/components/get_and_save_t24_news_detail.dart';
+import 'package:auto_tweet/components/save_new_news.dart';
 import 'package:auto_tweet/gdocs.dart';
 import "package:auto_tweet/gpt.dart" as gpt;
 import 'package:auto_tweet/scraper.dart';
+import 'package:auto_tweet/tweet_system.dart';
 
 void main(List<String> arguments) async {
   print(await GSheetsApi().init());
-  /* var sonDakika = await T24().sonDakika();
-  var lastTenNews = await GSheetsApi().getLestTenNews();
-  for (int i = 0; i < lastTenNews.length; i++) {
-    for (int s = 0; s < sonDakika.length; s++) {
-      if (lastTenNews[i][2] == sonDakika[s]['title']) {
-        sonDakika.removeRange(s, sonDakika.length);
-        print('sonDakika haber eşleşmesi');
-        break;
-      }
-    }
-  }
-  List<List<dynamic>> saveSonDakika = [];
-  for (var element in sonDakika) {
-    saveSonDakika.add([
-      '',
-      element["time"].toString(),
-      element["title"].toString(),
-      element["link"].toString()
-    ]);
-  }
-  if (saveSonDakika.isNotEmpty) {
-    saveSonDakika.first.first = DateTime.now().toIso8601String();
-    GSheetsApi().write(
-        worksheet: GSheetsApi.t24SonDakikaWorkSheet,
-        data: saveSonDakika.reversed.toList());
-  } */
-  saveNewNews();
-  /* print(await T24().haberDetay(
-      link: Uri.parse(
-          'https://t24.com.tr/haber/antalya-ucusunda-yanindaki-yolcuya-zorla-oral-seks-yapan-kadin-gozaltina-alindi,1140960'))); */
+  saveNewNewsDetails();
 }
 
-void saveNewNews() async {
+/* void saveNewNews() async {
   var sonDakika = await T24().sonDakika();
   var lastTenNews = await GSheetsApi().getLestTenNewsT24();
   comparison:
@@ -71,5 +45,18 @@ void saveNewNews() async {
         worksheet: GSheetsApi.t24SonDakikaWorkSheet,
         data: saveSonDakika.reversed.toList());
     print('yeni başlıklar docs a kaydedildi');
+  }
+}
+ */
+void saveNewNewsDetails() async {
+  var newNews = await saveNewNews();
+  print('saving new news');
+  var flitteredNews = TweetSystem().flitterNews(news: newNews);
+  print('flittering news');
+  if (flitteredNews != null && flitteredNews.isNotEmpty) {
+    for (var element in flitteredNews) {
+      getAndSaveT24NewsDetail(row: element);
+      print('saving news detail: title: ${element.first}');
+    }
   }
 }
