@@ -80,11 +80,21 @@ class T24 {
           html.querySelector('div._1YxhA > div._1C396 > div._1VAN- > h2')?.text;
       date =
           html.querySelector('div._1YxhA > div._1C396 > div._1VAN- > p')!.text;
-      final contentData =
+      final List<Element> contentData =
           html.querySelectorAll('div._39i_e > div > div > h3').toList();
       for (var element in contentData) {
         content += element.text;
         content += '\n';
+      }
+      final Element? mediaContainer = html.querySelector('div._39i_e');
+      final List<Element>? medias = mediaContainer?.querySelectorAll('img');
+      if (medias != null && medias.isNotEmpty) {
+        for (var element in medias) {
+          mediaLinks.add(element.attributes['src']);
+          /*  bu kısım çalışmıyor çünkü görseller js yüklenmediği için orada yok
+          web view kullanarak tekrar deneyebilirisin fakat bütün screp metodlarını test etmen gerekecek
+          görseller olmadanda şuan idare edersin görselleri sonra hallederiz */
+        }
       }
     } else if (croppedLink.startsWith('yazarlar')) {
       t24Category = 'yazarlar';

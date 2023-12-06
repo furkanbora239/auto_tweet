@@ -40,6 +40,7 @@ class GSheetsApi {
     final Worksheet worksheet =
         await GSheetsApi().getWorkSheet(workSheetName: 'T24 Detailed News');
     worksheet.values.insertRow(1, [
+      'link',
       'title',
       'subtitle',
       'date',
@@ -61,8 +62,8 @@ class GSheetsApi {
     }
   }
 
-  Future<List> getLestTenNewsT24() async {
-    final List lestTenList = [];
+  Future<List<List<String>>> getLestTenNewsT24() async {
+    final List<List<String>> lestTenList = [];
     final lastSave = await t24SonDakikaWorkSheet.values.lastRow();
     final lastSaveIndex = await t24SonDakikaWorkSheet.values
         .rowIndexOf(lastSave![3], inColumn: 4);
