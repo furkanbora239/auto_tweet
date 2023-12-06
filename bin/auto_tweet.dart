@@ -1,4 +1,3 @@
-import 'package:auto_tweet/components/get_and_save_t24_news_detail.dart';
 import 'package:auto_tweet/components/save_new_news.dart';
 import 'package:auto_tweet/gdocs.dart';
 import 'package:auto_tweet/scraper.dart';
