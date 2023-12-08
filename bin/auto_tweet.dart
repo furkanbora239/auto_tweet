@@ -8,7 +8,7 @@ void main(List<String> arguments) async {
   getNewNewsAndSaveDetails();
   /* print(await T24().haberDetay(
       link: Uri.parse(
-          'https://t24.com.tr/foto-haber/sosyal-guvenlik-musaviri-ali-tezel-acikladi-emekliye-ne-kadar-zam-olacak,27451/2'))); */
+          'https://t24.com.tr/video/turkiye-ve-dunya-gundeminde-neler-oldu-iste-bir-bakista-bugun,58286'))); */
 }
 
 /* void saveNewNewsDetails() async {

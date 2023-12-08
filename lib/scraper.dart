@@ -21,7 +21,7 @@ class T24 {
   }
 
   Future<Map<String, Object?>> haberDetay({required Uri link}) async {
-    late String date;
+    late final String date;
     late String title;
     String? subtitle;
     late final String t24Category;
@@ -39,13 +39,25 @@ class T24 {
           .text;
       title =
           html.querySelector("div.col-md-8.col-xs-12 > div._3mmXU > h1")!.text;
-      mediaLinks.add(
-          link); // twitter automatically finds the video. so it is enough to use the link to the web page
-      final contentData =
-          html.querySelectorAll('div._3mmXU > div._1NMxy > div > p').toList();
-      for (var element in contentData) {
-        content += element.text;
-        content += '\n';
+      mediaLinks.add(link
+          .toString()); // twitter automatically finds the video. so it is enough to use the link to the web page
+      if (title.contains("Türkiye ve dünya gündeminde neler oldu?")) {
+        print('özet olduğunu anladı ');
+        final contentData = html
+            .querySelectorAll(
+                "div._3mmXU > div._1NMxy > div > ul > li > strong")
+            .toList();
+        for (var element in contentData) {
+          content += element.text;
+          content += '\n';
+        }
+      } else {
+        final contentData =
+            html.querySelectorAll('div._3mmXU > div._1NMxy > div > p').toList();
+        for (var element in contentData) {
+          content += element.text;
+          content += '\n';
+        }
       }
     } else if (croppedLink.startsWith('haber')) {
       t24Category = 'haber';
